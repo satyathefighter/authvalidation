@@ -1,0 +1,64 @@
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css');
+@import "~bootstrap/scss/bootstrap.scss";
+.error {
+    color: red;
+}
+
+
+/**
+ * Demo Styles
+ */
+
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+body {
+    position: relative;
+    margin: 0;
+    padding-bottom: 6rem;
+    min-height: 100%;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    background-color: #e9ecef;
+}
+
+.demo {
+    margin: 0 auto;
+    padding-top: 64px;
+    max-width: 640px;
+    width: 94%;
+}
+
+.demo h1 {
+    margin-top: 0;
+}
+
+
+/**
+ * Footer Styles
+ */
+
+.footer {
+    color: white;
+    position: absolute;
+    right: 0;
+    left: 0;
+    padding: 1rem;
+    background-color: black;
+    text-align: center;
+}
+
+.content {
+    margin-top: 70px;
+}
+
+.banner-image-data {
+    background: url('https://www.vuemoviemoney.co.uk/Content/Images/vue-cinema-front.jpg') 50% 50%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    width: 100%;
+    height: 700px;
+}

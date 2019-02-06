@@ -1,0 +1,149 @@
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <h3>Custom Validation Form</h3>
+            <form [formGroup]="userForm" (ngSubmit)="onFormSubmit()">
+                <div class="form-group">
+                    <label for="username">Username: *</label>
+                    <input type="text" formControlName="username" class="form-control" [ngClass]="{ 'is-invalid': submitted && username.errors }" />
+                    <div *ngIf="submitted && username.errors" class="invalid-feedback">
+                        <div *ngIf="username.errors.required"> Username required.</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password: *</label>
+                    <input type="text" formControlName="password" type="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && password.errors }" />
+                    <div *ngIf="submitted && password.errors" class="error">
+                        <div *ngIf="password.errors.required">
+                            Password required.
+                        </div>
+                        <div *ngIf="password.errors.matchForUsername">
+                            Password can not be same as Username.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Password: *</label>
+                    <input type="text" formControlName="confirmPassword" type="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && confirmPassword.errors }" />
+                    <div *ngIf="submitted && confirmPassword.errors" class="error">
+                        <div *ngIf="confirmPassword.errors.required">
+                            Confirm Password required.
+                        </div>
+                        <div *ngIf="confirmPassword.errors.cnfPassword">
+                            Confirm Password not matched.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="notificationMode">Notification Mode: *</label>
+                    <input type="radio" value="email" formControlName="notificationMode"> Email
+                    <input type="radio" value="mobile" formControlName="notificationMode"> Mobile
+                    <input type="radio" value="both" formControlName="notificationMode"> Both
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input formControlName="email" class="form-control">
+                    <div *ngIf="submitted && email.errors" class="error">
+                        <div *ngIf="email.errors.required">
+                            Email required.
+                        </div>
+                        <div *ngIf="email.errors.email">
+                            Email not valid.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="mobileNumber">Mobile Number: </label>
+                    <input formControlName="mobileNumber" class="form-control">
+                    <div *ngIf="submitted && mobileNumber.errors" class="error">
+                        <div *ngIf="mobileNumber.errors.required">
+                            Mobile number required.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="favoriteLocations">Favorite Locations: *</label>
+                    <div formArrayName="favoriteLocations">
+                        <div *ngFor="let loc of favoriteLocations.controls; index as i">
+                            <input [formControlName]="i" class="form-control">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group" [formGroup]="userForm.get('permanentaddress')">
+                    <label>Permanent Address: </label>
+                    <input formControlName="address1" class="form-control">
+                    <div *ngIf="submitted && permanentaddress.controls.address1.errors" class="error">
+                        <div *ngIf="permanentaddress.controls.address1.errors.required">
+                            Field is required.
+                        </div>
+                    </div>
+                    <input formControlName="address2" class="form-control">
+                    <div *ngIf="submitted && permanentaddress.controls.address2.errors" class="error">
+                        <div *ngIf="permanentaddress.controls.address2.errors.required">
+                            Field is required.
+                        </div>
+                    </div>
+                    <input formControlName="address3" class="form-control">
+                    <div *ngIf="submitted && permanentaddress.controls.address3.errors" class="error">
+                        <div *ngIf="permanentaddress.controls.address3.errors.required">
+                            Field is required.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Premanent and Present Address are same? </label>
+                    <input type="checkbox" formControlName="bothsameornot">
+                </div>
+                <div class="form-group" [formGroup]="userForm.get('presentaddress')">
+                    <label>Present Address: </label>
+                    <input formControlName="address1" class="form-control">
+                    <div *ngIf="submitted && presentaddress.controls.address1.errors" class="error">
+                        <div *ngIf="presentaddress.controls.address1.errors.required">
+                            Field is required.
+                        </div>
+                    </div>
+                    <input formControlName="address2" class="form-control">
+                    <div *ngIf="submitted && presentaddress.controls.address2.errors" class="error">
+                        <div *ngIf="presentaddress.controls.address2.errors.required">
+                            Field is required.
+                        </div>
+                    </div>
+                    <input formControlName="address3" class="form-control">
+                    <div *ngIf="submitted && presentaddress.controls.address3.errors" class="error">
+                        <div *ngIf="presentaddress.controls.address3.errors.required">
+                            Field is required.
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Select Country </label>
+                    <select formControlName="country" class="form-control">
+									<option value="" disabled selected>Please select</option>
+									<option *ngFor="let country of countries" [value]="country.id">{{country.name}}</option>
+								</select>
+                    <div *ngIf="submitted && country.errors" class="error">
+                        <div *ngIf="country.errors.required">
+                            Field is required.
+                        </div>
+                    </div>
+                </div>
+                <ng-container *ngIf="otherCountryFlag">
+                    <div class="form-group">
+                        <label>Enter Country </label>
+                        <input formControlName="otherCountry" class="form-control">
+                        <div *ngIf="submitted && otherCountry.errors" class="error">
+                            <div *ngIf="otherCountry.errors.required">
+                                Field is required.
+                            </div>
+                        </div>
+                    </div>
+                </ng-container>
+                <div class="form-group">
+                    <div style="margin-left:20%">
+                        <button class="btn btn-md btn-primary">Submit</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
